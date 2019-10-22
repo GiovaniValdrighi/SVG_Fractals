@@ -3,7 +3,6 @@ var zoom_center = 205;
 var ativo = 0;
 var txt_info = document.getElementById("info");
 
-
 function iniciar(){
     ativo = 1;
 }
@@ -54,8 +53,6 @@ function generate_circles(depth, r, x ,y){
 }
 
 
-//generate_circles(0, 70, 150, 150);
-
 //inicializating first circle
 create_circle("c-0-0", 70, 150, 150);
 circle_ar[0] = new Array();
@@ -64,12 +61,11 @@ ind++;
 depth = circle_ar.length;
 n_remov = 0;
 var old_ind = 0;
-
 function update_scale(){
     
 
-    //if(depth > 35){
-    //    circle_ar = [];
+    //if(depth >= 15){
+    //    depth = 0;
     //}
 
     //se a simulação estiver ativa
@@ -99,6 +95,10 @@ function update_scale(){
             }
         }
 
+        if(!circle_ar[0].length){
+            circle_ar.shift();
+        }
+
         //getting smallest radius
         c_min = document.getElementById(circle_ar[circle_ar.length-1][0]);
         r_min = parseFloat(c_min.getAttributeNS(null, "r"));
@@ -108,8 +108,8 @@ function update_scale(){
             circle_ar[circle_ar.length] = new Array();
 
             //run every small circle
-            for(let i = 0; i < circle_ar[depth-1].length; i++){
-                c = document.getElementById(circle_ar[depth -1][i]);
+            for(let i = 0; i < circle_ar[circle_ar.length-2].length; i++){
+                c = document.getElementById(circle_ar[circle_ar.length -2][i]);
                 x = parseFloat(c.getAttributeNS(null, "cx"));
 
                 //checking if it is in the viewbox
