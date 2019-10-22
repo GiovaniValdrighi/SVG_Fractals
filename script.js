@@ -73,6 +73,9 @@ n_remov = 0;
 
 function update_scale(){
     txt_info.innerHTML = "Depth:" + depth + "&emsp; Circles: " + ind;
+    if(depth > 35){
+        circle_ar = [];
+    }
     if(ativo == 1){
         for(let i = 0; i< depth; i++){
             for(let j = 0; j< circle_ar[i].length; j++){
