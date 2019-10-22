@@ -2,6 +2,8 @@ var svg = document.getElementById("inline");
 var zoom_center = 205;
 var ativo = 0;
 var txt_info = document.getElementById("info");
+
+
 function iniciar(){
     ativo = 1;
 }
@@ -25,20 +27,26 @@ function create_circle(id, r, x, y){
 //array of the ids
 var circle_ar = new Array();
 var ind = 0;
+
+//função que gera os círculos inicias
 function generate_circles(depth, r, x ,y){
 
     //creating circle
     create_circle("c-"+depth+ "-"+ind, r, x ,y);
 
-    //recursion update
-    if( circle_ar[depth]){
+    //updating array
+    if(circle_ar[depth]){
         circle_ar[depth].push("c-" + depth + "-" + ind);
     }else{
         circle_ar[depth] = new Array();
         circle_ar[depth].push("c-" + depth + "-" + ind);
     }
+
+    //moving counters
     depth++;
     ind++;
+
+    //recursion
     if (r > 2){
         generate_circles(depth, r/2, x-r, y);
         generate_circles(depth, r/2, x+r, y);
@@ -46,54 +54,65 @@ function generate_circles(depth, r, x ,y){
 }
 
 
-function generate_circles_loop(depth, r, x, y){
-    
-    //creating circle
-    create_circle("c-"+depth+ "-"+ind, r, x ,y);
+//generate_circles(0, 70, 150, 150);
 
-    //recursion update
-    if( circle_ar[depth]){
-        circle_ar[depth].push("c-" + depth + "-" + ind);
-    }else{
-        circle_ar[depth] = new Array();
-        circle_ar[depth].push("c-" + depth + "-" + ind);
-    }
-    depth++;
-    ind++;
-    if (r > 2){
-        generate_circles(depth, r/2, x-r, y);
-        generate_circles(depth, r/2, x+r, y);
-    }
-}
-
-generate_circles(0, 70, 150, 150);
+//inicializating first circle
+create_circle("c-0-0", 70, 150, 150);
+circle_ar[0] = new Array();
+circle_ar[0].push("c-0-0");
+ind++;
 depth = circle_ar.length;
 n_remov = 0;
-
+var old_ind = 0;
 
 function update_scale(){
-    txt_info.innerHTML = "Depth:" + depth + "&emsp; Circles: " + ind;
-    if(depth > 35){
-        circle_ar = [];
-    }
+    
+
+    //if(depth > 35){
+    //    circle_ar = [];
+    //}
+
+    //se a simulação estiver ativa
     if(ativo == 1){
-        for(let i = 0; i< depth; i++){
+        //screen info
+        txt_info.innerHTML = "Depth:" + depth + "&emsp; Circles: " + ind 
+        + "&emsp; New circles:" + (ind - old_ind) + "&emsp; Deleted: " + n_remov + "&emsp; Tm_array:" + circle_ar.length;
+
+        //for each circle, increase radius and zoom
+        for(let i = 0; i< circle_ar.length; i++){
             for(let j = 0; j< circle_ar[i].length; j++){
                 c = document.getElementById(circle_ar[i][j]);
+                if(c){
                 r = parseFloat(c.getAttributeNS(null, "r"));
                 x = parseFloat(c.getAttributeNS(null, "cx"));
-                c.setAttributeNS(null, "r", r + r/22);
-                c.setAttributeNS(null, "cx", x + (x-zoom_center)/22);
+
+                //checking if the circle still in the viewbox
+                if(((x+r >0) && (x+r < 300)) || ((x-r > 0) && (x-r <300))){
+                    c.setAttributeNS(null, "r", r + r/50);
+                    c.setAttributeNS(null, "cx", x + (x-zoom_center)/50);
+                }else{
+                    svg.removeChild(c);
+                    circle_ar[i].splice(j, 1);
+                    n_remov++;
+                }
+                }
             }
         }
 
+        //getting smallest radius
         c_min = document.getElementById(circle_ar[circle_ar.length-1][0]);
         r_min = parseFloat(c_min.getAttributeNS(null, "r"));
+        //if smallest radius is bigger than 2, create new circles
         if(r_min >2){
+            old_ind = ind;
             circle_ar[circle_ar.length] = new Array();
-            for(let i = 0; i < circle_ar[circle_ar.length-2].length; i++){
-                c = document.getElementById(circle_ar[circle_ar.length-2][i]);
+
+            //run every small circle
+            for(let i = 0; i < circle_ar[depth-1].length; i++){
+                c = document.getElementById(circle_ar[depth -1][i]);
                 x = parseFloat(c.getAttributeNS(null, "cx"));
+
+                //checking if it is in the viewbox
                 if( (x - r_min > 0) && (x + r_min < 300)){
                     ind++;
                     circle_ar[circle_ar.length-1].push("c-"+depth+"-"+ind);
@@ -103,7 +122,7 @@ function update_scale(){
                     create_circle("c-"+depth+"-"+ind, r_min/2, x + r_min, 150);
                 }
             }
-            depth = circle_ar.length;
+            depth++;
         }
     }
 }
