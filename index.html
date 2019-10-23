@@ -7,6 +7,7 @@
     <p>In this project I'll simulate fractals using SVG animations.</p>
     <button type = "button" onclick="iniciar()">Iniciar</button>
     <button type = "button" onclick="pausar()">Pausar</button>
+    <input type = "range" min = "0" max= "300" value="205" id = "slider" oninput="troca_centro()">
     <p id = "info"></p>
     <div style = "width:500px;height:500px">
         <svg id = "inline" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">

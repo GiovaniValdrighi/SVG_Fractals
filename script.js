@@ -2,6 +2,7 @@ var svg = document.getElementById("inline");
 var zoom_center = 205;
 var ativo = 0;
 var txt_info = document.getElementById("info");
+var slider = document.getElementById("slider");
 
 function iniciar(){
     ativo = 1;
@@ -9,6 +10,10 @@ function iniciar(){
 
 function pausar(){
     ativo = 0;
+}
+
+function troca_centro(){
+    zoom_center = slider.value;
 }
 
 function create_circle(id, r, x, y){
@@ -26,32 +31,6 @@ function create_circle(id, r, x, y){
 //array of the ids
 var circle_ar = new Array();
 var ind = 0;
-
-//função que gera os círculos inicias
-function generate_circles(depth, r, x ,y){
-
-    //creating circle
-    create_circle("c-"+depth+ "-"+ind, r, x ,y);
-
-    //updating array
-    if(circle_ar[depth]){
-        circle_ar[depth].push("c-" + depth + "-" + ind);
-    }else{
-        circle_ar[depth] = new Array();
-        circle_ar[depth].push("c-" + depth + "-" + ind);
-    }
-
-    //moving counters
-    depth++;
-    ind++;
-
-    //recursion
-    if (r > 2){
-        generate_circles(depth, r/2, x-r, y);
-        generate_circles(depth, r/2, x+r, y);
-    }
-}
-
 
 //inicializating first circle
 create_circle("c-0-0", 70, 150, 150);
