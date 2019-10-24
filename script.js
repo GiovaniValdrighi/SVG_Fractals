@@ -1,7 +1,7 @@
 var svg = document.getElementById("inline");
 var zoom_center = 205;
 var ativo = 0;
-var txt_info = document.getElementById("info");
+var txt_info = document.getElementById("info-circulos");
 var slider = document.getElementById("slider");
 
 function iniciar(){
