@@ -38,8 +38,7 @@ circle_ar[0] = new Array();
 circle_ar[0].push("c-0-0");
 ind++;
 depth = circle_ar.length;
-n_remov = 0;
-var old_ind = 0;
+
 function update_scale(){
     
 
@@ -50,8 +49,7 @@ function update_scale(){
     //se a simulação estiver ativa
     if(ativo == 1){
         //screen info
-        txt_info.innerHTML = "Depth:" + depth + "&emsp; Circles: " + ind 
-        + "&emsp; New circles:" + (ind - old_ind) + "&emsp; Deleted: " + n_remov + "&emsp; Tm_array:" + circle_ar.length;
+        txt_info.innerHTML = "Profundidade recurssão:" + depth;
 
         //for each circle, increase radius and zoom
         for(let i = 0; i< circle_ar.length; i++){
@@ -68,7 +66,6 @@ function update_scale(){
                 }else{
                     svg.removeChild(c);
                     circle_ar[i].splice(j, 1);
-                    n_remov++;
                 }
                 }
             }
@@ -83,7 +80,6 @@ function update_scale(){
         r_min = parseFloat(c_min.getAttributeNS(null, "r"));
         //if smallest radius is bigger than 2, create new circles
         if(r_min >2){
-            old_ind = ind;
             circle_ar[circle_ar.length] = new Array();
 
             //run every small circle
