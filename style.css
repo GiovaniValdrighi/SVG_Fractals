@@ -1,0 +1,17 @@
+#all{
+  width: 600px;
+  margin: 0 auto;
+}
+
+
+#botoes-circulos{
+  width: 100px;
+  margin: 0 auto;
+}
+
+#svg-circles{
+  width: 600px;
+  height: 600px;
+  border-style: solid;
+  border-color: black;
+}
