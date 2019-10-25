@@ -105,45 +105,10 @@ var myVar = setInterval(update_scale, 50);
 
 
 
-var svg2 = document.getElementById("inline-koch");
 
+var g = document.getElementById("koch-group");
 
-function create_path(p0, p1){
-    //begin calculus
-    //third point of equilateral triangle
-
-    P = [((p1[0] - p0[0])/2 + (p1[1] - p0[1])*Math.sqrt(3)/2 + p0[0]), 
-            (-(p1[0] - p0[0])*Math.sqrt(3)/2 + (p1[1] - p0[1])/2 + p0[1])];
-    //vectors
-    v0 = [P[0] - p0[0], P[1] - p0[1]];
-    v1 = [p1[0] - P[0], p1[1] - P[1]];
-
-    //create_circle(p0[0], p0[1]);
-    //create_circle(p1[0], p1[1]);
-    //create_circle(P[0], P[1]);
-    //path
-    d = "M" + (p0[0]) + " " + (p0[1]) + " "
-        + "L" + (p0[0] + v0[0]/3) + " " + (p0[1] + v0[1]/3) + " "
-        + "M" + (p0[0] + v0[0]*2/3) + " " + (p0[1] + v0[1]*2/3) + " "
-        + "L" + (P[0]) + " " + (p0[1] + v0[1]) + " "
-        + "L" + (P[0] + v1[0]/3) + " " + (p1[1] - v1[1]*2/3) + " " 
-        + "M" + (P[0] + v1[0]*2/3) + " " + (p1[1] - v1[1]/3) + " "
-        + "L" + (p1[0]) + " " + (p1[1]); 
-    p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    p.setAttributeNS(null, "stroke", "black");
-    p.setAttributeNS(null, "stroke-width", 1);
-    p.setAttributeNS(null, "d", d);
-    p.setAttributeNS(null, "fill", "none");
-    svg2.appendChild(p);
-    console.log("hi");
-
-    return [[p0[0] + v0[0]/3, p0[1] + v0[1]/3 ],
-           [p0[0] + v0[0]*2/3, p0[1] + v0[1]*2/3 ],
-           [P[0] + v1[0]/3, p1[1] - v1[1]*2/3],
-           [P[0] + v1[0]*2/3, p1[1] - v1[1]/3]]
-}
-
-function create_path2(a, b){
+function create_path(a, b){
     //begin calculus
     //next to points
     c = [(a[0]*2 + b[0])/3,(a[1]*2 + b[1])/3];
@@ -164,7 +129,7 @@ function create_path2(a, b){
     p.setAttributeNS(null, "stroke-width", 1);
     p.setAttributeNS(null, "d", path);
     p.setAttributeNS(null, "fill", "none");
-    svg2.appendChild(p);
+    g.appendChild(p);
 
 }
 
@@ -182,8 +147,6 @@ function calculate_pts(a, b){
     return [[a,c],[c,e],[e,d], [d,b]]
 }
 
-depth_limit = 5;
-ar_tuples = new Array();
 
 function generate_paths(p0, p1){
     depth = 0;
@@ -193,15 +156,25 @@ function generate_paths(p0, p1){
         for(let i = 0; i < ar_tuples[ar_tuples.length-1].length; i++){
             Array.prototype.push.apply(aux, calculate_pts(ar_tuples[ar_tuples.length-1][i][0], ar_tuples[ar_tuples.length-1][i][1]));
         }
-        console.log(aux);
         ar_tuples.push(aux);
     }
     
     for(let i = 0; i < ar_tuples[ar_tuples.length-1].length; i++){
-        create_path2(ar_tuples[ar_tuples.length-1][i][0], ar_tuples[ar_tuples.length-1][i][1]);
+        create_path(ar_tuples[ar_tuples.length-1][i][0], ar_tuples[ar_tuples.length-1][i][1]);
     }
 }
 
+function koch_depth(){
+    if (depth_limit < 8){
+        g.innerHTML = "";
+        depth_limit++;
+        generate_paths([10, 150], [490,150]);
+    }
+}
+
+depth_limit = 1;
+ar_tuples = new Array();
 
 generate_paths([10, 150], [490,150]);
-console.log(ar_tuples);
+
+
