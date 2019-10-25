@@ -9,19 +9,25 @@
         <h2> Círculos fractais</h2>
         <p> Um círculo com raio <b> r </b> é criado na posição <b> x </b>, 
             recursivamente dois círculos com raio <b> 0.5r </b> são criados na extremidade desse círculo. </p>
-        <div id = "botoes-circulos">
-            <button type = "button" onclick="iniciar()">Iniciar</button>
-            <button type = "button" onclick="pausar()">Pausar</button>
+        <div id = "button-circles">
+            <button type = "button" onclick="start()">Iniciar</button>             
+            <button type = "button" onclick="pause()">Pausar</button>
         </div>
-        <div id = "slider-circulo">
+        <div id = "slider-circles">
             <p>Posição do zoom (0 a 300)</p>
-            <input type = "range" min = "0" max= "300" value="205" id = "slider" oninput="troca_centro()">
+            <input type = "range" min = "0" max= "300" value="205" id = "slider" oninput="change_center()">
         </div>
-        <p id = "info-circulos"></p>
+        <p id = "info-circles"></p>
         <div id = "svg-circles">
             <svg id = "inline" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
-            <script type="text/javascript" src="script.js"></script>
+           
         </div>
+        <h2>Floco de neve de Koch</h2>
+        <div id = "svg-koch">
+            <svg id = "inline-koch" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+
+        <script type="text/javascript" src="script.js"></script>
     </div>
     </body>
 </html>
