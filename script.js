@@ -1,4 +1,3 @@
-;
 var svg = document.getElementById("inline");
 var zoom_center = 205;
 var active = 0;
@@ -34,7 +33,7 @@ var circle_ar = new Array();
 var ind = 0;
 
 //inicializating first circle
-create_circle("c-0-0", 70, 150, 150);
+create_circle("c-0-0", 70, 150, 100);
 circle_ar[0] = new Array();
 circle_ar[0].push("c-0-0");
 ind++;
@@ -47,7 +46,7 @@ function update_scale(){
     //if the simulation is active
     if(active == 1){
         //screen info
-        txt_info.innerHTML = "Profundidade recurssão:" + depth;
+        txt_info.innerHTML = "recurssão:" + depth;
 
         //for each circle, increase radius and zoom
         for(let i = 0; i< circle_ar.length; i++){
@@ -77,7 +76,7 @@ function update_scale(){
         c_min = document.getElementById(circle_ar[circle_ar.length-1][0]);
         r_min = parseFloat(c_min.getAttributeNS(null, "r"));
         //if smallest radius is bigger than 2, create new circles
-        if(r_min >2){
+        if(r_min >1){
             circle_ar[circle_ar.length] = new Array();
 
             //run every small circle
@@ -89,10 +88,10 @@ function update_scale(){
                 if( (x - r_min > 0) && (x + r_min < 300)){
                     ind++;
                     circle_ar[circle_ar.length-1].push("c-"+depth+"-"+ind);
-                    create_circle("c-"+depth+"-"+ind, r_min/2, x - r_min, 150);
+                    create_circle("c-"+depth+"-"+ind, r_min/2, x - r_min, 100);
                     ind++;
                     circle_ar[circle_ar.length-1].push("c-"+depth+"-"+ind);
-                    create_circle("c-"+depth+"-"+ind, r_min/2, x + r_min, 150);
+                    create_circle("c-"+depth+"-"+ind, r_min/2, x + r_min, 100);
                 }
             }
             depth++;
@@ -178,3 +177,58 @@ ar_tuples = new Array();
 generate_paths([10, 150], [490,150]);
 
 
+var svg3 = document.getElementById("inline-sierpinski");
+
+//creating the triangle
+triangle_path = "M 0 0 L 150 0 L 75 130 L 0 0"
+sierpinski_t = document.createElementNS("http://www.w3.org/2000/svg", "path");
+sierpinski_t.setAttributeNS(null, "d", triangle_path);
+sierpinski_t.setAttributeNS(null, "fill", "none");
+sierpinski_t.setAttributeNS(null, "stroke", "black");
+sierpinski_t.setAttributeNS(null, "stroke-width", 1);
+svg3.appendChild(sierpinski_t);
+
+
+function sier_create_circle(x, y){
+    c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttributeNS(null, "r", 1);
+    c.setAttributeNS(null, 'cx', x);
+    c.setAttributeNS(null, 'cy', y);
+    c.setAttributeNS(null, "fill", "black");
+    svg3.appendChild(c);
+}
+
+sier_active = 0;
+n_pts = 1;
+var first_pt, last_pt;
+triangle_vert = [[0, 0], [150,0], [75, 130]];
+    function sierpinski_update(){
+       
+        if(sier_active){
+            n_pts++;
+            if(n_pts < 1500){
+                random_vert = triangle_vert[Math.floor(Math.random()*3)];
+                new_pt = [(last_pt[0] + random_vert[0])/2, (last_pt[1] + random_vert[1])/2]
+                sier_create_circle(new_pt[0], new_pt[1]);
+                last_pt = new_pt;
+            }
+        }
+    }
+
+var myVar1 = setInterval(sierpinski_update, 50);
+
+
+
+svg3.addEventListener('click', function(e) {
+    if(n_pts ==1){
+        var pt = svg3.createSVGPoint(), svgP;
+        pt.x = e.clientX;
+        pt.y = e.clientY;
+        svgP = pt.matrixTransform(svg3.getScreenCTM().inverse());
+        console.log("hi");
+        first_pt = [svgP.x, svgP.y];
+        last_pt = first_pt;
+        sier_active = 1;
+        sier_create_circle(first_pt[0], first_pt[1]);
+    }
+}, false);
