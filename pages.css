@@ -5,16 +5,16 @@
 }
 
 #logo{
-    width: 800px;
+    width: 230px;
     height: 110px;
     padding: 0 auto;
-    margin: 0 80;
+    margin: 0 auto;
 }
 
 #menu{
-    width: 500px;
+    width: 600px;
     height: 30px;
-    background-color: #555;
+    background-color: white;
     padding: 0;
     margin: 0 auto;
 }
@@ -22,14 +22,18 @@
 #icon{
     float: left;
     text-align: center;
-    width: 20%;
+    width: 19%;
     padding: 5px 0;
-    color: white;
+    color: black;
+    font-family: "Courier New";
     text-decoration: none;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 0px 1px;
 }
 
 #icon:hover{
-    background-color: black;
+    background-color: #707070;
 }
 
 #conteudo{
