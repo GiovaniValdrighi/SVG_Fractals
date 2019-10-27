@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Fractals</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id = "all">
+        <h1> Fractais</h1>
+        <div id = "text-circles">
+        <p> Um círculo com raio <b> r </b> é criado na posição <b> x</b>, 
+            recursivamente dois círculos com raio <b> 0.5r </b> são criados nas extremidades desse círculo. </p>
+        <div id = "button-circles">
+            <button type = "button" onclick="start()">Iniciar</button>             
+            <button type = "button" onclick="pause()">Pausar</button>
+        </div>
+        <div id = "slider-circles">
+            <input type = "range" min = "20" max= "280" value="205" id = "slider" oninput="change_center()">
+        </div>
+        <p id = "info-circles"></p>
+        </div>
+        <div id = "svg-circles">
+            <svg id = "inline" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"></svg>
+           
+        </div>
+
+        <div id = "text-2">
+            <p>Fractais são um subconjunto do espaço euclidiano em que a dimensão de Hausdorff excede a dimensão topológica.
+                São mais conhecidos por apresentarem padrões similares em escalas menores. Um dos primeiros fractais é a função
+                Weistrass, contínua em toda parte e derivável em nenhuma parte. Em seguida é publicado o Conjunto de Cantor. 
+                É com Benoit Mandelbrot que surge o termo <i>fractal</i>, baseado no adjetivo do latim <i>fractus</i> 
+                cujo verbo <i>frangere</i> correspondente significa <i>quebrar</i>, <i>criar fragmentos irregulares</i>.<div class=""></div> 
+            </p>
+        </div>
+        <div id = "text-koch">
+            <p><b>Curva de Koch</b></p>
+            <ul>
+                <li>Um segmento é dividido em três</li>
+                <li>No segmentro central é construído um triângulo equilátero</li>
+                <li>A base do triângulo é apagada</li>
+            </ul>
+            <div id="button-koch">
+            <button id = "next-step" type="button" onclick="koch_depth()">Avançar</button>
+            </div>
+        </div>
+        <div id = "svg-koch">
+            <svg id = "inline-koch" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg"><g id = "koch-group"></g></svg>
+        </div>
+
+        <div id = "sierpinski">
+            <svg id = "inline-sierpinski" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
+
+        </div>
+        <script type="text/javascript" src="script.js"></script>
+    </div>
+    </body>
+</html>

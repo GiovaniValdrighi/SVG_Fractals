@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Fractals</title>
+        <link rel="stylesheet" type="text/css" href="pages.css">
+    </head>
+    <body>
+        <div id = "corpo">
+            <div id = "logo">
+            </div>
+            <div id = "menu">
+
+            </div>
+            <div id = "conteudo">
+                    <p> Um círculo com raio <b> r </b> é criado, 
+                        recursivamente dois círculos com raio <b> 0.5r </b> 
+                        são criados nas extremidades desse círculo. </p>
+                    <button type = "button" onclick="start()">Iniciar</button>             
+                    <button type = "button" onclick="pause()">Pausar</button>
+                    <input type = "range" min = "20" max= "280" value="205" id = "slider" oninput="change_center()">
+                    <svg id = "inline" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"></svg>
+                    <script type="text/javascript" src="circle.js"></script>
+            </div>
+        </div>
+    </body>
+</html>
