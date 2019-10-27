@@ -8,11 +8,26 @@
             <div id = "logo">
             </div>
             <div id = "menu">
-
+                <a href="circle.html" id = "icon">Círculos</a>
+                <a href="koch.html" id = "icon">Koch</a>
+                <a href="caos.html" id = "icon">Caos</a>
+                <a href="arvore.html" id = "icon">Árvore</a>
+                <a href="ref.html" id = "icon">Referência</a>
             </div>
             <div id = "conteudo">
-
+                <p><b>Jogo do caos</b></p></h2>
+                <ul>
+                    <li>Escolha um ponto aleatório dentro do triângulo, esse será seu ponto atual</li>
+                    <li>Escolha um vértice aleatório do triângulo, desenhe o ponto que se encontra na metade
+                        do segmento entre o ponto atual e o vértice
+                    </li>
+                    <li>Torne esse ponto desenhado o ponto atual e repita o item 2</li>
+                    <svg id = "inline-sierpinski" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
+                    <script type="text/javascript" src="caos.js"></script>
+                </ul>
             </div>
+
+            <div id = "rodape"></div>
         </div>
     </body>
 </html>

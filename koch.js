@@ -1,55 +1,70 @@
-var svg = document.getElementById("inline-koch");
-first_line = document.createElementNS("http://www.w3.org/2000/svg", "path");
-first_line.setAttributeNS(null, "stroke", "black");
-first_line.setAttributeNS(null, "stroke-width", 1);
-first_line.setAttributeNS(null, "d", "M 10 150 L 170 150 M 330 150 L 490 150");
-svg.appendChild(first_line);
+var g = document.getElementById("koch-group");
 
-
-function create_path(p0, p1){
+function create_path(a, b){
     //begin calculus
-    //third point of equilateral triangle
-    P = [((p1[0] - p0[0])/2 + (p1[1] - p0[1])*Math.sqrt(3)/2 + p0[0]), 
-            (-(p1[0] - p0[0])*Math.sqrt(3)/2 + (p1[1] - p0[1])/2 + p0[1])];
-    //vectors
-    v0 = [P[0] - p0[0], P[1] - p0[1]];
-    v1 = [p1[0] - P[0], p1[1] - P[1]];
+    //next to points
+    c = [(a[0]*2 + b[0])/3,(a[1]*2 + b[1])/3];
+    d = [(a[0] + 2*b[0])/3,(a[1] + 2*b[1])/3];
 
-    //create_circle(p0[0], p0[1]);
-    //create_circle(p1[0], p1[1]);
-    //create_circle(P[0], P[1]);
+    //the last point, top of the triangle
+    e = [((d[0] - c[0])/2 + (d[1] - c[1])*Math.sqrt(3)/2 + c[0]), 
+            (-(d[0] - c[0])*Math.sqrt(3)/2 + (d[1] - c[1])/2 + c[1])];
+
     //path
-    d = "M" + (p0[0]) + " " + (p0[1]) + " "
-        + "L" + (p0[0] + v0[0]/3) + " " + (p0[1] + v0[1]/3) + " "
-        + "M" + (p0[0] + v0[0]*2/3) + " " + (p0[1] + v0[1]*2/3) + " "
-        + "L" + (P[0]) + " " + (p0[1] + v0[1]) + " "
-        + "L" + (P[0] + v1[0]/3) + " " + (p1[1] - v1[1]*2/3) + " " 
-        + "M" + (P[0] + v1[0]*2/3) + " " + (p1[1] - v1[1]/3) + " "
-        + "L" + (p1[0]) + " " + (p1[1]); 
+    path = "M" + (a[0]) + " " + (a[1]) + " "
+        + "L" + (c[0]) + " " + (c[1]) + " "
+        + "L" + (e[0]) + " " + (e[1]) + " "
+        + "L" + (d[0]) + " " + (d[1]) + " "
+        + "L" + (b[0]) + " " + (b[1]); 
     p = document.createElementNS("http://www.w3.org/2000/svg", "path");
     p.setAttributeNS(null, "stroke", "black");
     p.setAttributeNS(null, "stroke-width", 1);
-    p.setAttributeNS(null, "d", d);
+    p.setAttributeNS(null, "d", path);
     p.setAttributeNS(null, "fill", "none");
-    svg.appendChild(p);
-    console.log("hi");
+    g.appendChild(p);
 
-    return [[p0[0] + v0[0]/3, p0[1] + v0[1]/3 ],
-           [p0[0] + v0[0]*2/3, p0[1] + v0[1]*2/3 ],
-           [P[0] + v1[0]/3, p1[1] - v1[1]*2/3],
-           [P[0] + v1[0]*2/3, p1[1] - v1[1]/3]]
 }
 
 
-function generate_paths(p0, p1, depth){
+function calculate_pts(a, b){
+    //begin calculus
+    //next to points
+    c = [(a[0]*2 + b[0])/3,(a[1]*2 + b[1])/3];
+    d = [(a[0] + 2*b[0])/3,(a[1] + 2*b[1])/3];
+
+    //the last point, top of the triangle
+    e = [((d[0] - c[0])/2 + (d[1] - c[1])*Math.sqrt(3)/2 + c[0]), 
+        (-(d[0] - c[0])*Math.sqrt(3)/2 + (d[1] - c[1])/2 + c[1])];
+
+    return [[a,c],[c,e],[e,d], [d,b]]
+}
+
+
+function generate_paths(p0, p1){
+    depth = 0;
+    ar_tuples[0] = [[p0, p1]];
+    while (ar_tuples.length < depth_limit){
+        aux = [];
+        for(let i = 0; i < ar_tuples[ar_tuples.length-1].length; i++){
+            Array.prototype.push.apply(aux, calculate_pts(ar_tuples[ar_tuples.length-1][i][0], ar_tuples[ar_tuples.length-1][i][1]));
+        }
+        ar_tuples.push(aux);
+    }
     
-    depth++;
-    const [p2, p3, p4, p5] = create_path(p0, p1);
-    if(depth <= 5){
-        generate_paths(p2, p3, depth);
-        generate_paths(p4, p5, depth);
+    for(let i = 0; i < ar_tuples[ar_tuples.length-1].length; i++){
+        create_path(ar_tuples[ar_tuples.length-1][i][0], ar_tuples[ar_tuples.length-1][i][1]);
     }
 }
 
+function koch_depth(){
+    if (depth_limit < 8){
+        g.innerHTML = "";
+        depth_limit++;
+        generate_paths([10, 150], [490,150]);
+    }
+}
 
-generate_paths([170, 150], [330,150], 0);
+depth_limit = 1;
+ar_tuples = new Array();
+
+generate_paths([10, 150], [490,150]);

@@ -8,11 +8,30 @@
             <div id = "logo">
             </div>
             <div id = "menu">
-
+                <a href="circle.html" id = "icon">Círculos</a>
+                <a href="koch.html" id = "icon">Koch</a>
+                <a href="caos.html" id = "icon">Caos</a>
+                <a href="arvore.html" id = "icon">Árvore</a>
+                <a href="ref.html" id = "icon">Referência</a>
             </div>
             <div id = "conteudo">
-
+                <p><b>Curva de Koch</b></p>
+                <ul>
+                <li>Um segmento é dividido em três</li>
+                <li>No segmentro central é construído um triângulo equilátero</li>
+                <li>A base do triângulo é apagada</li>
+                </ul>
+                <button id = "next-step" type="button" onclick="koch_depth()">Avançar</button>
+                <svg id = "inline-koch" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg"><g id = "koch-group"></g></svg>
+                <p>Fractais são um subconjunto do espaço euclidiano em que a dimensão de Hausdorff excede a dimensão topológica.
+                        São mais conhecidos por apresentarem padrões similares em escalas menores. Um dos primeiros fractais é a função
+                        Weistrass, contínua em toda parte e derivável em nenhuma parte. Em seguida é publicado o Conjunto de Cantor. 
+                        É com Benoit Mandelbrot que surge o termo <i>fractal</i>, baseado no adjetivo do latim <i>fractus</i> 
+                        cujo verbo <i>frangere</i> correspondente significa <i>quebrar</i>, <i>criar fragmentos irregulares</i>.<div class=""></div> 
+                </p>
+                <script type="text/javascript" src="koch.js"></script>
             </div>
+            <div id = "rodape"></div>
         </div>
     </body>
 </html>
