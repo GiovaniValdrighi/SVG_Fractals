@@ -1,7 +1,6 @@
 #tudo{
     width: 900px;
     height: 530px;
-    border: solid;
     padding: 0;
     margin: auto;
 }
@@ -9,7 +8,6 @@
 #imagem{
     width: 900px;
     height: 500px;
-    border: solid green;
     padding: 0;
     margin: 0;
 }
