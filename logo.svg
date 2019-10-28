@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    viewBox="0 0 159.77992 77.056694"
@@ -65,6 +66,24 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-27.088067,-88.474082)">
+    <g id = "animations">
+      <rect width="20" height="20" x="37" y="95" fill="none" stroke="black" stroke-width="0.1">
+         <animateTransform attributeName="transform" type="rotate" 
+         from="0 47 105" to="360 47 105" 
+         dur="6s" begin="0s" repeatCount="indefinite"/>
+      </rect>
+
+      <rect width="20" height="10" x="87" y="145" fill="none" stroke="black" stroke-width="0.1">
+         <animateTransform attributeName="transform" type="translate"
+         values="0;20;0" keyTimes="0;0.5;1"
+         dur="4s" begin="0s" repeatCount="indefinite"/>
+      </rect>
+
+      <circle r="10" cx = "150" cy="100" fill="none" stroke="black" stroke-width="0.1">
+         <animate attributeName="r" keyTImes="0;0.5;1" values="10;15;10" dur="5s" begin="0s" repeatCount="indefinite"/>
+      </circle>
+
+    </g>
     <g
        aria-label="fractais"
        transform="scale(0.96061284,1.0410021)"
