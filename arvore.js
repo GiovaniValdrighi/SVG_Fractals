@@ -59,5 +59,40 @@ function draw_recursive(a, b, theta, line_obj){
 
 ind = 0;
 line_obj = new line();
-draw_recursive([100, 400], [100, 300], Math.PI/3, line_obj);
-console.log(line_obj.left.left.left);
+
+draw_recursive([100, 400], [100, 300], Math.PI/6, line_obj);
+
+function draw_path2(size, id, transform){
+    path = "M 0 0" +
+    "L 0 " + size;
+    p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttributeNS(null, "id", id);
+    p.setAttributeNS(null, "d", path);
+    p.setAttributeNS(null, "transform", transform);
+    p.setAttributeNS(null, "stroke", "black");
+    p.setAttributeNS(null, "stroke-width", 0.5);
+    svg.appendChild(p);
+}
+
+
+function draw_recursive2(size, theta, transform){
+    ind++;
+    id = "l-"+ind;
+    //draw the line a,b
+    draw_path2(size, id, transform);
+
+    //translate the origin to the end of the new line
+    transform = transform + "translate(0 " + size +") ";
+
+   
+    //verify the size of the new path, if it's big enough, call recursive
+    if(size > 2){
+        const transform_r = transform + "rotate(" + theta + ") ";
+        const transform_l = transform + "rotate(-" + theta + ") ";
+        draw_recursive2(size/2, theta, transform_l);
+        draw_recursive2(size/2, theta, transform_r);
+        //if(n_branch == 3) {draw_recursive(b, c, theta);}
+    }
+}
+
+draw_recursive2(32, 30, "translate(50 100)");
