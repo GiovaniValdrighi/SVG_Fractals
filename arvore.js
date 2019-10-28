@@ -1,36 +1,63 @@
 svg = document.getElementById("inline-arvore");
+n_branch = 2;
 
-function draw_path(a, b){
+var line = function(id, a, b, c){
+    this.id = id;
+    this.st_pt = a;
+    this.fn_pt = b;
+    this.rotated_fn_pt = c;
+    this.left = null;
+    this.right = null;
+}
+
+function draw_path(a, b, id){
     path = "M" + a[0] + " " + a[1] +
     "L" + b[0] + " " + b[1];
     p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttributeNS(null, "id", id);
     p.setAttributeNS(null, "d", path);
     p.setAttributeNS(null, "stroke", "black");
     p.setAttributeNS(null, "stroke-width", 0.5);
     svg.appendChild(p);
 }
 
-function draw_recursive(a, b, theta){
+
+function draw_recursive(a, b, theta, line_obj){
+    ind++;
+    id = "l-"+ind;
     //draw the line a,b
-    draw_path(a,b);
+    draw_path(a,b, id);
+
+    //create the line object
+    line_obj.st_pt = a;
+    line_obj.fn_pt = b;
+    line_obj.id = id;
+    line_obj.right = new line();
+    line_obj.left = new line();
+
 
     //calculate extension of (a,b)
     l = [(b[0]- a[0]), (b[1] - a[1])];
-    console.log(l);
-    c = [(b[0] + l[0]/2),(b[1] + l[1]/2)];
-
-    //calculate c_r and c_l (rotate c to left and right theta degrees)
-    const c_r = [((c[0] - b[0])*Math.cos(theta) + (c[1] - b[1])*Math.sin(theta) + b[0]),
-        (-(c[0] - b[0])*Math.sin(theta) + (c[1] - b[1])*Math.cos(theta) + b[1])];
-    const c_l = [((c[0] - b[0])*Math.cos(theta) - (c[1] - b[1])*Math.sin(theta) + b[0]),
-        ((c[0] - b[0])*Math.sin(theta) + (c[1] - b[1])*Math.cos(theta) + b[1])];
-    
+   
     //verify the size of the new path, if it's big enough, call recursive
-    console.log((Math.pow(l[0], 2) + Math.pow(l[1],2))/2 );
-    if( (Math.pow(l[0], 2) + Math.pow(l[1],2))/2 > 4){
-        draw_recursive(b, c_r, theta);
-        draw_recursive(b, c_l, theta);
+    if( (Math.pow(l[0], 2) + Math.pow(l[1],2))/2 > 1){
+
+        const c = [(b[0] + l[0]/2),(b[1] + l[1]/2)];
+
+        //calculate c_r and c_l (rotate c to left and right theta degrees)
+        const c_r = [((c[0] - b[0])*Math.cos(theta) + (c[1] - b[1])*Math.sin(theta) + b[0]),
+            (-(c[0] - b[0])*Math.sin(theta) + (c[1] - b[1])*Math.cos(theta) + b[1])];
+        const c_l = [((c[0] - b[0])*Math.cos(theta) - (c[1] - b[1])*Math.sin(theta) + b[0]),
+            ((c[0] - b[0])*Math.sin(theta) + (c[1] - b[1])*Math.cos(theta) + b[1])];
+        
+        draw_recursive(b, c_r, theta, line_obj.right);
+        draw_recursive(b, c_l, theta, line_obj.left);
+        if(n_branch == 3) {draw_recursive(b, c, theta);}
     }
 }
 
-draw_recursive([200,400], [200,300], Math.PI/6);
+
+ind = 0;
+line_obj = new line();
+draw_recursive([100, 400], [100, 300], Math.PI/3, line_obj);
+console.log(line_obj.left.left.left);
