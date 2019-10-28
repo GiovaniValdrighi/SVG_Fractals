@@ -1,5 +1,6 @@
 svg = document.getElementById("inline-arvore");
-n_branch = 2;
+slider = document.getElementById("slider");
+n_branch = 3;
 
 var line = function(id, a, b, c){
     this.id = id;
@@ -60,7 +61,16 @@ function draw_recursive(a, b, theta, line_obj){
 ind = 0;
 line_obj = new line();
 
-draw_recursive([100, 400], [100, 300], Math.PI/6, line_obj);
+//draw_recursive([100, 400], [100, 300], Math.PI/6, line_obj);
+
+var line2 = function(id, size, transform){
+    this.id = id;
+    this.size = size;
+    this.transform = transform;
+    this.left = null;
+    this.right = null;
+    this.middle = null;
+}
 
 function draw_path2(size, id, transform){
     path = "M 0 0" +
@@ -75,11 +85,14 @@ function draw_path2(size, id, transform){
 }
 
 
-function draw_recursive2(size, theta, transform){
+function draw_recursive2(size, theta, transform, line_obj){
     ind++;
     id = "l-"+ind;
     //draw the line a,b
     draw_path2(size, id, transform);
+    line_obj.id = id;
+    line_obj.transform = transform;
+    line_obj.size = size;
 
     //translate the origin to the end of the new line
     transform = transform + "translate(0 " + size +") ";
@@ -89,10 +102,37 @@ function draw_recursive2(size, theta, transform){
     if(size > 2){
         const transform_r = transform + "rotate(" + theta + ") ";
         const transform_l = transform + "rotate(-" + theta + ") ";
-        draw_recursive2(size/2, theta, transform_l);
-        draw_recursive2(size/2, theta, transform_r);
-        //if(n_branch == 3) {draw_recursive(b, c, theta);}
+        line_obj.left = new line2();
+        line_obj.right = new line2();
+        draw_recursive2(size*0.66, theta, transform_l, line_obj.left);
+        draw_recursive2(size*0.66, theta, transform_r, line_obj.right);
+        if(n_branch == 3) {
+            line_obj.middle = new line2();
+            draw_recursive2(size*0.66, theta, transform, line_obj.middle);}
     }
 }
 
-draw_recursive2(32, 30, "translate(50 100)");
+var root = new line2()
+draw_recursive2(32, 30, "translate(50 10)", root);
+console.log(root);
+
+function update(){
+    theta = slider.value;
+    update_recursive(theta, "translate(50 10)", root);
+}
+
+function update_recursive(theta, transform, line_obj){
+    //change the transform of the current object
+    l = document.getElementById(line_obj.id);
+    l.setAttributeNS(null, "transform", transform);
+    
+    if(line_obj.left){
+        transform = transform + "translate(0 " + line_obj.size + ") ";
+        const transform_r = transform + "rotate(" + theta + ") ";
+        const transform_l = transform + "rotate(-" + theta + ") ";
+        update_recursive(theta, transform_r, line_obj.right);
+        update_recursive(theta, transform_l, line_obj.left);
+        if(n_branch == 3) {
+            update_recursive(theta, transform, line_obj.middle);}
+    } 
+}
