@@ -1,4 +1,4 @@
-var svg = document.getElementById("inline");
+var svg = document.getElementById("circle-inline");
 var zoom_center = 205;
 var active = 0;
 var slider = document.getElementById("slider");

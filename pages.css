@@ -1,7 +1,7 @@
 #corpo{
     width: 900px;
     margin: 0 auto;
-    border: solid;
+    font-family: "Arial";
 }
 
 #logo{
@@ -38,9 +38,10 @@
 
 #conteudo{
     width: 900px;
-    border: solid green;
     padding: 0;
     margin: 0;
+    position: relative;
+    top: 20px;
 }
 
 #rodape{
@@ -50,4 +51,30 @@
     margin: 0;
     color: #303030;
     font-size: 11;
+    position: relative;
+    top: 30px;
+}
+
+#texto-circulos, #texto-koch, #texto-koch2, #texto-caos, #texto-arvore{
+    text-align: justify;
+    width: 700px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+#botoes-circulos, #botoes-koch, #botoes-arvore{
+    text-align: center;
+    width: 180px;
+    margin: 0 auto;
+    
+}
+
+#inline-circle, #inline-sierpinski, #caos{
+    width: 800px;
+    margin: 0 auto;
+}
+
+#arvore{
+    width: 600px;
+    margin: 0 auto;
 }

@@ -18,10 +18,23 @@
                 <a href="ref.html" id = "icon">Referência</a>
             </div>
             <div id = "conteudo">
-                oi resk
+                    <div id = "texto-arvore">
+                        <ul>
+                            <li>Desenhamos uma reta de comprimento <b>l</b>.</li>
+                            <li>Desenhamos três novas retas com comprimento <b>0.5l</b>,
+                            uma na mesma direção da anterior, uma rotacionada <b>g</b> graus no sentido horário,
+                        outra rotacionada <b>g</b> graus no sentido anti-horário.</li>
+                        <li>Repetimos o processo com cada uma das novas retas geradas.</li>
+                        </ul>
+                    </div>
+                    <div id ="botoes-arvore">
                     <button type="button" id="random" onclick="random()">Aleatório</button>
                     <input type = "range" min = "0" max= "120" value="30" id = "slider" oninput="update()">
-                <svg id = "inline-arvore" viewBox="0 0 120 142" xmlns="http://www.w3.org/2000/svg"></svg>
+                    </div>
+                    <div id="arvore">
+                <svg id = "inline-arvore" viewBox="0 0 120 115" xmlns="http://www.w3.org/2000/svg"></svg>
+                    </div>
+                <div id = "rodape"><p>Produzido por Giovani de Almeida Valdrighi. 2019.</p></div>
             </div>
             <script type="text/javascript" src="arvore.js"></script>
         </div>
