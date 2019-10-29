@@ -79,9 +79,9 @@
          dur="4s" begin="0s" repeatCount="indefinite"/>
       </rect>
 
-      <circle r="10" cx = "150" cy="100" fill="none" stroke="black" stroke-width="0.1">
-         <animate attributeName="r" keyTImes="0;0.5;1" values="10;15;10" dur="5s" begin="0s" repeatCount="indefinite"/>
-      </circle>
+         <circle r="10" cx = "150" cy="100" fill="none" stroke="black" stroke-width="0.1">
+            <animate attributeName="r" keyTImes="0;0.5;1" values="10;15;10" dur="5s" begin="0s" repeatCount="indefinite"/>
+         </circle>
 
     </g>
     <g
