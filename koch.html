@@ -19,11 +19,20 @@
             </div>
             <div id = "conteudo">
                 <div id = "texto-koch">
-                <p><b>Curva de Koch</b></p>
+                <p>Utilizando da formalização matemática, fractais são um subconjunto do espaço euclidiano em que a dimensão de Hausdorff excede a dimensão topológica.
+                    Apesar do conceito de dimensão de Hausdorff utilizar de estruturas matemáticas avançadas, a sua intuição é bastante simples,
+                    porém, neste projeto não será apresentada, recomendando-se o vídeo produzido pelo 3Blue1Brown: <i>Fracatals are typically not self-similar</i>.
+                    Partindo disto, fractais são comumente ditos como estruturas que possuem um número de dimensões não inteiro.
+                        </p>
+                <p><b>Curva de Koch (1,261 dimensão)</b></p>
+                <p>Um dos primeiros fractais publicados, apareceu em 1904 no paper <i>On a Continuous Curve Without Tangents, Constructible from Elementary Geometry</i>
+                de Helge von Koch. É um fractal construído de forma iterativa, originalmente partindo de um triângulo equilátero. No exemplo abaixo
+            está simulado o processo descrito por Koch em um dos lados desse triângulo:</p>
                 <ul>
-                <li>Um segmento é dividido em três</li>
-                <li>No segmentro central é construído um triângulo equilátero</li>
-                <li>A base do triângulo é apagada</li>
+                <li>Um segmento é dividido em três.</li>
+                <li>No segmentro central é construído um triângulo equilátero.</li>
+                <li>A base do triângulo é apagada.</li>
+                <li>O processo se repete em todos os segmentos existentes.</li>
                 </ul>
                 </div>
                 <div id="botoes-koch">
@@ -31,12 +40,7 @@
                 </div>
                 <svg id = "inline-koch" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg"><g id = "koch-group"></g></svg>
                 <div id="texto-koch2">
-                <p>Fractais são um subconjunto do espaço euclidiano em que a dimensão de Hausdorff excede a dimensão topológica.
-                        São mais conhecidos por apresentarem padrões similares em escalas menores. Um dos primeiros fractais é a função
-                        Weistrass, contínua em toda parte e derivável em nenhuma parte. Em seguida é publicado o Conjunto de Cantor. 
-                        É com Benoit Mandelbrot que surge o termo <i>fractal</i>, baseado no adjetivo do latim <i>fractus</i> 
-                        cujo verbo <i>frangere</i> correspondente significa <i>quebrar</i>, <i>criar fragmentos irregulares</i>.<div class=""></div> 
-                </p>
+               
                 </div>
                 <script type="text/javascript" src="koch.js"></script>
             </div>

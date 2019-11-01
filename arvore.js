@@ -43,11 +43,11 @@ function draw_recursive(size, theta, transform, line_obj, stroke){
         const transform_l = transform + "rotate(-" + theta + ") ";
         line_obj.left = new line();
         line_obj.right = new line();
-        draw_recursive(size*0.5, theta, transform_l, line_obj.left, stroke*0.8);
-        draw_recursive(size*0.5, theta, transform_r, line_obj.right, stroke*0.8);
+        draw_recursive(size*0.5, theta, transform_l, line_obj.left, stroke*0.66);
+        draw_recursive(size*0.5, theta, transform_r, line_obj.right, stroke*0.66);
         if(n_branch == 3) {
             line_obj.middle = new line();
-            draw_recursive(size*0.5, theta, transform, line_obj.middle, stroke*0.8);}
+            draw_recursive(size*0.5, theta, transform, line_obj.middle, stroke*0.66);}
     }
 }
 
@@ -82,5 +82,5 @@ function random(){
 
 ind = 0;
 var root = new line()
-draw_recursive(-64, 30, "translate(60 142)", root, 0.5);
+draw_recursive(-64, 30, "translate(60 142)", root, 1);
 

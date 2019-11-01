@@ -19,13 +19,23 @@
             </div>
             <div id = "conteudo">
                 <div id="texto-caos">
-                <p><b>Jogo do caos</b></p></h2>
+                <p><b>Jogo do caos</b></p>
+                <p>O termo "Jogo do Caos"("Chaos game") remete a um processo para gerar fractais através de um polígono
+                    e um a escolha de um ponto inicial aleatório para a inicialização. Em termos gerais, um ponto é escolhido dentro do polígono,
+                    um vértice aleatório é escolhido é um novo ponto é gerado entre o ponto original e o vértice escolhido, essa fração é mais um parâmetro
+                    do jogo, com esse novo ponto gerado, mais um vértice aleatório é escolhido e assim o processo se repete sucessivamente. Se o polígono
+                    escolhido for um triângulo equilátero e a fração escolhida for 0.5 o fractal gerado será o triângulo de Sierpiński.
+                </p>
+                <p><b>Triângulo de Sierpiński (1,585 dimensão)</b></p>
+                <p>Nomeado em homenagem a Wacław Sierpiński, é composto por um triângulo equilátero que subdividido em triângulos
+                    cada vez menores recursivamente. Logo abaixo, a simulação recria o fractal através do jogo do caos e ao lado também é simulado com um pentagono:
+                </p>
                 <ul>
-                    <li>Escolha um ponto aleatório dentro do triângulo, esse será seu ponto atual</li>
-                    <li>Escolha um vértice aleatório do triângulo, desenhe o ponto que se encontra na metade
-                        do segmento entre o ponto atual e o vértice
+                    <li>Escolha um ponto aleatório dentro do polígono, esse será seu ponto atual.</li>
+                    <li>Escolha um vértice aleatório do polígono, desenhe o ponto que se encontra na metade
+                        do segmento entre o ponto atual e o vértice.
                     </li>
-                    <li>Torne esse ponto desenhado o ponto atual e repita o item 2</li>
+                    <li>Torne esse ponto desenhado o ponto atual e repita o item 2.</li>
                 </div>
                 <div id="caos">
                     <svg id = "inline-sierpinski" viewBox="-3 0 290 150" xmlns="http://www.w3.org/2000/svg"></svg>

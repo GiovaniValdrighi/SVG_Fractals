@@ -31,37 +31,48 @@ penta_active = 0;
 n_pts1 = 1;
 n_pts2 = 1;
 var first_pt_triangle, current_pt_triangle, first_pt_penta, current_pt_penta, r_ind, r_last;
+var counter = 1;
 triangle_vert = [[0, 130], [150,130], [75, 0]];
 pentagon_vert = [[170, 130], [255, 130], [281, 49], [212, 0], [145, 49]];
-    function sierpinski_update(){
+function sierpinski_update(){
        
         if(sier_active){
-            n_pts1++;
             if(n_pts1 < 3000){
-                random_vert = triangle_vert[Math.floor(Math.random()*3)];
-                new_pt_t = [(current_pt_triangle[0] + random_vert[0])/2, (current_pt_triangle[1] + random_vert[1])/2]
-                sier_create_circle(new_pt_t[0], new_pt_t[1]);
-                current_pt_triangle = new_pt_t;
+
+                n_pts1+= counter;
+                for(let n = 0; n < counter; n++){
+                    random_vert = triangle_vert[Math.floor(Math.random()*3)];
+                    new_pt_t = [(current_pt_triangle[0] + random_vert[0])/2, (current_pt_triangle[1] + random_vert[1])/2]
+                    sier_create_circle(new_pt_t[0], new_pt_t[1]);
+                    current_pt_triangle = new_pt_t;
+                }
             }
         }
 
         if(penta_active){
-            n_pts2++;
-            if(n_pts2 < 6000){
-                r_ind = Math.floor(Math.random()*5);
-                if(r_ind == r_last){r_ind = Math.floor(Math.random()*5)};
-                if(r_ind == r_last){r_ind = Math.floor(Math.random()*5)};
-                if(r_ind == r_last){r_ind = Math.floor(Math.random()*5)};
-                r_last = r_ind;
-                random_vert = pentagon_vert[r_ind ];
-                new_pt_p = [(current_pt_penta[0] + random_vert[0])/2, (current_pt_penta[1] + random_vert[1])/2]
-                sier_create_circle(new_pt_p[0], new_pt_p[1]);
-                current_pt_penta = new_pt_p;
+            
+            if(n_pts2 < 9000){
+                n_pts2+= counter;
+                    for(let m = 0; m < counter; m++){
+                    r_ind = Math.floor(Math.random()*5);
+                    if(r_ind == r_last){r_ind = Math.floor(Math.random()*5)};
+                    if(r_ind == r_last){r_ind = Math.floor(Math.random()*5)};
+                    if(r_ind == r_last){r_ind = Math.floor(Math.random()*5)};
+                    r_last = r_ind;
+                    random_vert = pentagon_vert[r_ind ];
+                    new_pt_p = [(current_pt_penta[0] + random_vert[0])/2, (current_pt_penta[1] + random_vert[1])/2]
+                    sier_create_circle(new_pt_p[0], new_pt_p[1]);
+                    current_pt_penta = new_pt_p;
+                }
+            counter += 0.2;
             }
+         
         }
-    }
+  
+}
 
-var myVar1 = setInterval(sierpinski_update, 1);
+
+var myVar1 = setInterval(sierpinski_update, 50);
 
 
 
