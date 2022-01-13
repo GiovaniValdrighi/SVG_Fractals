@@ -2,7 +2,7 @@
 
 Final project for the discipline of _Introduction to Computer Graphics_ at the undergraduate course of _Applied Mathematics_ at EMAp FGV. Implementation of simulation of different fractals that can be visualized while being generated. A fractal can be described as a structure that repeats itself infinitely. It uses SVG to represent the shapes on the screen and contains different interactivity options. It is available at the [link](https://giovanivaldrighi.github.io/SVG_Fractals).
 
-![SVG Fractals]()
+![SVG Fractals](https://raw.githubusercontent.com/GiovaniValdrighi/SVG_Fractals/master/docs/logo.png)
 
 # Files organization
 
