@@ -8,7 +8,7 @@ Final project for the discipline of _Introduction to Computer Graphics_ at the u
 
 The files of the project are separated in the following folders:
 
-- `/docs`: constains HTML files of the web page, and the Javascript code for the simulation of the fractals.
+- `docs/`: constains HTML files of the web page, and the Javascript code for the simulation of the fractals.
 
 # Requirements and How to run
 
